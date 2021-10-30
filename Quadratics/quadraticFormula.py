@@ -1,5 +1,6 @@
 from os import write
 from manim import *
+from manim.mobject.mobject import T
 
 class QFormula(Scene):
     def construct(self):
@@ -19,8 +20,6 @@ class QFormula(Scene):
         eq = MathTex(*tlist).shift(ORIGIN)
         self.play(Write(eq))
 
-        # step0 = Text()
-
         tlist[0] = 'x^2'
         tlist[2] = '\\frac{b}{a}'
         tlist[5] = '\\frac{c}{a}'
@@ -29,10 +28,11 @@ class QFormula(Scene):
         step0 = MathTex('\\text{Dividing both }', '\\text{lhs rhs }', '\\text{by the coefficient of } x^2').shift(2.5*DOWN)
         step0[1].set_color(BLUE)
         self.play(Write(step0))
+        self.play(Indicate(eq[0][0]), run_time=2)
         self.play(FadeOut(step0))
 
         self.play(Transform(eq, eq1))
-        self.play(eq.animate.shift(3.5*UP))
+        self.play(eq.animate.shift(3.45*UP))
         
 
         # SECOND EQUATION ANIM
@@ -44,7 +44,7 @@ class QFormula(Scene):
         lhst = MathTex('+', nterm).next_to(eq1Group, RIGHT)
         rhst = MathTex('=', nterm)
 
-        step1_0 = MathTex('\\text{Halfing and Sqauring coefficient of }','x').shift(2*DOWN)
+        step1_0 = MathTex('\\text{Halfing and Squaring coefficient of }','x').shift(2*DOWN)
         step1_0[1].set_color(BLUE)
         step1_1 = MathTex('\\text{then adding to lhs and rhs}').next_to(step1_0, DOWN)
         stepGroup = VGroup(step1_0, step1_1)
@@ -53,6 +53,16 @@ class QFormula(Scene):
             self.play(
                 Write(i)
             )
+
+        self.play(Indicate(eq[2]))
+        xcoeffCopy = MathTex('\\frac{b}{a}').shift(ORIGIN)
+        xcoeffHalf = MathTex('\\frac{b}{2a}').shift(ORIGIN)
+        xcoeffSquared = MathTex('\\frac{b^2}{4a^2}').shift(ORIGIN)
+        self.play(Write(xcoeffCopy))
+        self.play(Transform(xcoeffCopy, xcoeffHalf))
+        self.play(Transform(xcoeffCopy, xcoeffSquared))
+        self.wait(2)
+        self.play(FadeOut(xcoeffCopy))
 
 
         self.play(Write(eq1Group))
@@ -141,11 +151,23 @@ class QFormula(Scene):
             Transform(eq2_1, eq2_1ch)
         )
 
-        self.play(eq2_0[1].animate.shift(DOWN))
-        self.play(eq2_1.animate.next_to(eq2_0[0], RIGHT))
+        self.play(
+            eq2_0[1].animate.shift(DOWN),
+            eq2_1.animate.next_to(eq2_0[0], RIGHT)
+        )
         eq2_lhst1ch = MathTex('-\\frac{b}{2a}').next_to(eq2_1, RIGHT)
         self.play(Transform(eq2_0[1], eq2_lhst1ch))
         finGroup = VGroup(eq2_0, eq2_1)
-        self.play(finGroup.animate.next_to(eq2GroupCopy, 2*DOWN))        
+        self.play(finGroup.animate.next_to(eq2GroupCopy, 2*DOWN))
+
+
+        test = MathTex('=', '\\frac{-b \\pm\\sqrt{b^2-4ac}}{2a}').next_to(eq2_0[0], RIGHT)
+        self.play(
+            Transform(VGroup(eq2_0[1], eq2_1), test)
+        )
+
+
+        finRect = SurroundingRectangle(finGroup, buff=MED_SMALL_BUFF)
+        self.play(ShowCreationThenFadeOut(finRect))
 
         self.wait(1) # FINAL WAIT
