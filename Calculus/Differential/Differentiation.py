@@ -61,7 +61,7 @@ class Differentiation(GraphScene, MovingCameraScene):
         graph_label4 = self.get_graph_label(graph=graph_intro1, label="e^x", x_val=1, direction=2*RIGHT, color=graph_intro4.color)
 
         self.play(
-            ShowCreation(graph_intro1),
+            Create(graph_intro1),
             Write(graph_label1)
         )
         self.play(
@@ -132,7 +132,7 @@ class Differentiation(GraphScene, MovingCameraScene):
 
 
         self.play(
-            ShowCreation(graph),
+            Create(graph),
             Write(graph_label),     
         )
         self.play(
@@ -150,28 +150,28 @@ class Differentiation(GraphScene, MovingCameraScene):
 
 
         self.play(self.camera.frame.animate.scale(0.2).move_to(self.coords_to_point(3,0)))
-        self.play(ShowCreation(xdx_indicate_rect))
+        self.play(Create(xdx_indicate_rect))
         self.wait(1)
         # self.play(FadeOut(xdx_indicate_rect))
         self.play(
             Restore(self.camera.frame),
-            ShowCreation(v_line1),
+            Create(v_line1),
         )
 
         self.play(
             self.camera.frame.animate.scale(0.2).move_to(self.coords_to_point(0,9)),
-            ShowCreation(h_line1),
+            Create(h_line1),
         )
-        self.play(ShowCreation(fxdx_indicate_rect))
+        self.play(Create(fxdx_indicate_rect))
         self.wait(1)
         # self.play(FadeOut(fxdx_indicate_rect))
         self.play(Restore(self.camera.frame),)
         
         self.play(
-            ShowCreation(dx_line)
+            Create(dx_line)
         )
         self.play(
-            ShowCreation(dx_arrow),
+            Create(dx_arrow),
             Write(dx_label),
         )
         self.play(
@@ -183,23 +183,23 @@ class Differentiation(GraphScene, MovingCameraScene):
         self.play(Write(xdx_label),)
         self.play(Transform(xdx_label, xdx_dot),)
         self.play(
-            ShowCreation(v_line2),
+            Create(v_line2),
         )
         self.play(Write(fxdx_label),)
         self.play(Transform(fxdx_label, fxdx_dot),)        
         self.play(
-            ShowCreation(h_line2),
+            Create(h_line2),
         )
 
         dy_dx_label = MathTex("dy \\over","dx")
         dy_dx_label.shift(ORIGIN + 2*RIGHT)
 
-        self.play(ShowCreation(dy_line_wiggle),)
+        self.play(Create(dy_line_wiggle),)
         self.wait(1)
         self.play(dy_controller.animate.set_value(9), run_time=3)
         self.wait(1)
         self.play(ReplacementTransform(dy_line_wiggle.copy(), dy_dx_label[0]), run_time=2)#
-        self.play(ShowCreation(dx_line_wiggle),)
+        self.play(Create(dx_line_wiggle),)
         self.wait(1)
         self.play(ReplacementTransform(dx_line_wiggle.copy(), dy_dx_label[1]), run_time=2)#
         self.wait(1)
@@ -230,12 +230,12 @@ class Differentiation(GraphScene, MovingCameraScene):
         step4 = get_dy_dx(MathTex("2\\cdot 3\\cdot dx \\over","dx"))
         step5 = get_dy_dx(MathTex("6"))
 
-        self.play(ShowCreation(step1))
+        self.play(Create(step1))
         self.play(Transform(step1, step2))
         self.play(Transform(step1, step3))
 
         step_init = get_exp("2")
-        self.play(ShowCreation(step_init))
+        self.play(Create(step_init))
         for i in ["3","4","5","n"]:
             step_ex = get_exp(i)
             self.play(Transform(step_init, step_ex))
