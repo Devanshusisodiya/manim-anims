@@ -8,18 +8,18 @@ class DomainRange(Scene):
 
         # SETTING UP OF THE SCENE -----------------------------------------------------
 
-        function = TexMobject(r'f(',r'x',r')',r'=',r'x^2',r'+5')
-        function_rep = TexMobject(r'f(',r'x',r')',r'=',r'x^2',r'+5')
+        function = Tex(r'f(',r'x',r')',r'=',r'x^2',r'+5')
+        function_rep = Tex(r'f(',r'x',r')',r'=',r'x^2',r'+5')
 
         
         setA = Ellipse(arc_center=ORIGIN+0.4*LEFT, height=4, width=2, color=BLUE)
         setA.shift(ORIGIN+3*LEFT)
-        setA_text = TextMobject('Set A')
+        setA_text = Tex('Set A')
         setA_text.next_to(setA, UP)
 
         setB = Ellipse(height=5, width=2, color=BLUE)
         setB.shift(ORIGIN+3*RIGHT)
-        setB_text = TextMobject('Set B')
+        setB_text = Tex('Set B')
         setB_text.next_to(setB, UP)
 
         self.play(
@@ -27,7 +27,7 @@ class DomainRange(Scene):
         )
 
         domain = [Integer(1),Integer(2),Integer(3),Integer(4)]
-        codomain = [TexMobject(r'1^2'),TexMobject(r'2^2'),TexMobject(r'3^2')]
+        codomain = [Tex(r'1^2'),Tex(r'2^2'),Tex(r'3^2')]
         codomain_set_func_dis = [r'6',r'9',r'14']
         codomain_set = [Integer(6),Integer(9),Integer(14),Integer(20),Integer(25)]
 
@@ -38,7 +38,7 @@ class DomainRange(Scene):
             func_in.shift(function[1].get_center())
             func_sq.shift(function[4].get_center()) 
 
-            function_cont = TexMobject(r'=',func_res)
+            function_cont = Tex(r'=',func_res)
             function_cont.next_to(function, RIGHT)
               
             # INNER ANIMATIONS --------------------------------------------------------------
@@ -79,8 +79,8 @@ class DomainRange(Scene):
         self.play(
             Write(setA_text),
             Write(setB_text),
-            ShowCreation(setA),
-            ShowCreation(setB),
+            Create(setA),
+            Create(setB),
         )
         self.play(
             Write(domain_group),
@@ -92,9 +92,9 @@ class DomainRange(Scene):
         arrow3 = always_redraw(lambda: Arrow(start=domain_group[2].get_center(), end=codomain_group[2].get_center()))
 
         self.play(
-            ShowCreation(arrow1),
-            ShowCreation(arrow2),
-            ShowCreation(arrow3),
+            Create(arrow1),
+            Create(arrow2),
+            Create(arrow3),
         )
         self.play(domain_group.animate.shift(0.5*UP))
         
@@ -112,7 +112,7 @@ class DomainRange(Scene):
 
 
         self.play(
-            ShowCreation(arrow4),
+            Create(arrow4),
         )
 
         for i in arrow_arr:
@@ -135,11 +135,11 @@ class FunctionDefinition(Scene):
 
         # SETUP OF THE SCENE ----------------------------------------------------
         setA = Ellipse(arc_center=ORIGIN, height=4, width=2, color=BLUE)
-        setA_text = TextMobject('Set A')
+        setA_text = Tex('Set A')
         setA_text.next_to(setA, UP)
 
         setB = Ellipse(arc_center=ORIGIN, height=4, width=2, color=BLUE)
-        setB_text = TextMobject('Set B')
+        setB_text = Tex('Set B')
         setB_text.next_to(setB, UP)
 
         
@@ -205,15 +205,16 @@ class FunctionDefinition(Scene):
         arrow3 = always_redraw(lambda: Arrow(start=c.get_center(), end=f.get_center()))
 
         self.play(
-            ShowCreation(arrow1),
-            ShowCreation(arrow2),
-            ShowCreation(arrow3),
+            Create(arrow1),
+            Create(arrow2),
+            Create(arrow3),
         )
 
         self.play(shifting_values.animate.shift(0.5*UP))                           
 
         #--------------------------------------------------------------------------
         #definition of mapping arrows is done later so as to accurately position them 
+
 
 
         g.next_to(shifting_values, 2*DOWN)
@@ -225,7 +226,7 @@ class FunctionDefinition(Scene):
         arrow4_ch2 = always_redraw(lambda: Arrow(start=g.get_center(), end=f.get_center()))
 
         self.play(
-            ShowCreation(arrow4),
+            Create(arrow4),
         )
         self.play(
             ReplacementTransform(arrow4, arrow4_ch)
