@@ -1,7 +1,7 @@
 from manim import *
 import numpy as np 
 
-class Integration1(GraphScene):
+class Integration1(Axes):
     def construct(self):
         self.wait(1)
         #config
@@ -128,7 +128,7 @@ class Integration2(GraphScene):
         info_rect_group = VGroup(x_val, fx_val, x_text, fx_text)
 
         self.play(Write(graph_label))
-        self.play(FadeInFrom(x_is_2))
+        self.play(FadeIn(x_is_2))
         self.play(ReplacementTransform(x_is_2[1].copy(), x_group_dup))
         self.add(x_group)
         self.remove(x_group_dup)
@@ -138,7 +138,7 @@ class Integration2(GraphScene):
         self.remove(fx_group_dup)
 
         self.play(ReplacementTransform(flat_rects[0], init_rects[0]))
-        self.play(FadeInFrom(dx_is_1, UP))
+        self.play(FadeIn(dx_is_1,target_position= UP))
         self.play(FadeOut(dx_is_1))
         for i in range(1, len(init_rects)):
             self.play(x.animate.set_value(i+2), run_time=1.5)
@@ -163,3 +163,4 @@ class Integration2(GraphScene):
             self.play(ReplacementTransform(flat_rects[i], init_rects[i]))
 
         self.wait(1)
+        
