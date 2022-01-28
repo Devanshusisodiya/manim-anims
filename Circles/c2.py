@@ -1,4 +1,3 @@
-from tracemalloc import start
 from manim import *
 import numpy as np
 
