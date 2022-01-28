@@ -1,4 +1,3 @@
-from cairo import RadialGradient
 from manim import *
 import numpy as np
 
