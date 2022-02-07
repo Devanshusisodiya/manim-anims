@@ -50,8 +50,6 @@ class T1(Scene):
 
         supText = VGroup(supText1, supText2, supText3, supText4)
 
-        # UNCOMMENT FOR PRODUCTION RELEASE
-
         # WRITING 3 EQUATIONS
         for i in range(len(supText)-1):
             self.play(Write(supText[i]))
@@ -66,7 +64,7 @@ class T1(Scene):
         # CONSIDERATION OF THETA
         
         considerLabel = Tex("considering ","$\\theta$").set_color(BLUE).shift(2*UP)
-        cBackground = BackgroundRectangle(considerLabel, fill_opacity=0.8, buff=0.1)
+        cBackground = BackgroundRectangle(considerLabel, fill_opacity=0.8, buff=0.6)
 
         self.play(
             Create(cBackground),
